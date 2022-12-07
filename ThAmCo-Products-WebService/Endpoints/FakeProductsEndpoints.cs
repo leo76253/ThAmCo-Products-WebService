@@ -15,13 +15,42 @@ namespace ThAmCo_Products_WebService.Endpoints
 
         public static void MapFakeProductsEndpoints(this WebApplication app)
         {
-            app.MapGet("/faketest", () => "External endpoint test - fake");
+            app.MapGet("/api/faketest", () => "External endpoint test - fake");
 
-            app.MapGet("/", () => productDtos.ToList());
+            app.MapGet("/api/", () => productDtos.ToList());
 
-            app.MapGet("/Product/{id}", (int id) => productDtos.FirstOrDefault(p => p.Id == id));
+            app.MapGet("/api/Product/{id}", (int id) => productDtos.FirstOrDefault(p => p.Id == id ));
 
-            //app.MapPost()
+            app.MapPost("/api/product", (ProductDto product) => productDtos.Append(product));
+
+            app.MapPut("/api/Product/{id}", (int id, ProductDto product) =>
+            {
+                var fakeProd = productDtos.FirstOrDefault(p => p.Id == id);
+                if (fakeProd == null)
+                {
+                    return Results.NotFound($"No Product with id:{id}");
+                }
+
+                fakeProd.ProductName = product.ProductName;
+                fakeProd.Quantity = product.Quantity;
+                fakeProd.Price = product.Price;
+                fakeProd.Description = product.Description;
+
+                return Results.Ok();
+            });
+
+            app.MapDelete("/api/Product/{id}", (int id) =>
+            {
+                var fakeProd = productDtos.FirstOrDefault(p => p.Id == id);
+                if (fakeProd == null)
+                {
+                    return Results.NotFound($"No Product with id:{id}");
+                }
+
+                productDtos = productDtos.Where(p => p.Id != id).ToArray();
+
+                return Results.Ok();
+            });
         }
 
 

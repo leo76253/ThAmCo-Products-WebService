@@ -4,7 +4,7 @@
     {
         public static void MapProductsEndpoints(this WebApplication app)
         {
-            app.MapGet("/test", () => "External endpoint test");
+            app.MapGet("/api/test", () => "External endpoint test");
         }
     }
 }
