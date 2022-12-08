@@ -14,11 +14,6 @@ namespace ThAmCo_Products_WebService.Services
             new ProductDto{ Id = 5, ProductName = "Bag", Quantity = 2, Price = 1, Description = "Drawstring bag"}
         };
 
-        public Task DeleteProductAsync(int Id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<ProductDto> GetProductAsync(int Id)
         {
             return Task.FromResult(productDtos.FirstOrDefault(p => p.Id == Id));
@@ -61,6 +56,19 @@ namespace ThAmCo_Products_WebService.Services
             //{
             //    return Task.FromException($"No Product with id:{updateProductDto.Id}".);
             //}
+
+            return Task.FromResult($"No Product with id:{updateProductDto.Id}");
+        }
+
+        public Task DeleteProductAsync(int Id)
+        {
+            var fakeProd = productDtos.FirstOrDefault(p => p.Id == Id);
+            if (fakeProd == null)
+            {
+                return Task.FromResult($"No Product with id:{Id}");
+            }
+
+            productDtos = productDtos.Where(p => p.Id != Id).ToArray();
 
             return Task.CompletedTask;
         }

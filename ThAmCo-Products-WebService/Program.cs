@@ -45,4 +45,7 @@ app.MapPut("/api/", async (IProductsService product, UpdateProductDto updateProd
 app.MapPost("/api/", async (IProductsService product, InsertProductDto insertProductDto) =>
     await product.InsertProductAsync(insertProductDto));
 
+app.MapDelete("/api/{id}", async (IProductsService product, int id) =>
+    await product.DeleteProductAsync(id));
+
 app.Run();
