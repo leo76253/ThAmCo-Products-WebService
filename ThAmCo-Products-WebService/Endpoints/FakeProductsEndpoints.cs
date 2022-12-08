@@ -21,7 +21,19 @@ namespace ThAmCo_Products_WebService.Endpoints
 
             app.MapGet("/api/Product/{id}", (int id) => productDtos.FirstOrDefault(p => p.Id == id ));
 
-            app.MapPost("/api/product", (ProductDto product) => productDtos.Append(product));
+            app.MapPost("/api/Product", (InsertProductDto product) => 
+            {
+                //newProductDto = new ProductDto
+                //{
+                //    Id = productDtos.Count() + 2,
+                //    ProductName = product.ProductName,
+                //    Price = product.Price,
+                //    Quantity = product.Quantity,
+                //    Description = product.Description
+                //}
+                //
+                //productDtos.Append(product);
+            });
 
             app.MapPut("/api/Product/{id}", (int id, ProductDto product) =>
             {
