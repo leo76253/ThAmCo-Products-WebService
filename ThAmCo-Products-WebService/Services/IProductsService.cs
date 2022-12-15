@@ -8,10 +8,6 @@ namespace ThAmCo_Products_WebService.Services
         Task<ProductDto> GetProductAsync(int Id);
         Task UpdateProductAsync(UpdateProductDto updateProductDto);
         Task InsertProductAsync(InsertProductDto insertProductDto);
-        
         Task DeleteProductAsync(int Id);
-
-
-
     }
 }

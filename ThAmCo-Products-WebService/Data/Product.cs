@@ -18,7 +18,7 @@ namespace ThAmCo_Products_WebService.Data
         public string Description { get; set; } = string.Empty;
         [Required]
         public DateTime CreatedOn { get; set; }
-        public DateTime UpdatedOn { get; set; } 
+        public DateTime? UpdatedOn { get; set; } 
         public bool IsDeleted { get; set; } = false;
     }
 }
